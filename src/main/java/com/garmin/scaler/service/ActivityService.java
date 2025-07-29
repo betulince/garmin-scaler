@@ -1,7 +1,7 @@
 package com.garmin.scaler.service;
 
-import com.garmin.scaler.model.DailyActivity;
-import com.garmin.scaler.model.DailyActivityDto;
+import com.garmin.scaler.domain.DailyActivity;
+import com.garmin.scaler.domain.DailyActivityDto;
 import com.garmin.scaler.persistency.ActivityRepository;
 import io.micronaut.transaction.annotation.Transactional;
 import jakarta.inject.Inject;
@@ -62,7 +62,6 @@ public class ActivityService {
         if (dto.getStartTimeLocal() != null) {
             entity.setStartTimeLocal(String.valueOf(LocalDateTime.parse(dto.getStartTimeLocal(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
         }
-
 
         entity.setDistance(dto.getDistance());
         entity.setDuration(dto.getDuration());

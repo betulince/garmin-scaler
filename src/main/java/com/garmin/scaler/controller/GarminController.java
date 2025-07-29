@@ -1,14 +1,13 @@
 package com.garmin.scaler.controller;
 
-import com.garmin.scaler.model.DailyActivity;
-import com.garmin.scaler.model.DailyActivityDto;
+import com.garmin.scaler.domain.DailyActivity;
+import com.garmin.scaler.domain.DailyActivityDto;
 import com.garmin.scaler.service.ActivityService;
+import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
-import io.micronaut.http.HttpResponse;
-
 import jakarta.inject.Inject;
 
 import java.util.Map;
