@@ -1,0 +1,5 @@
+apiVersion: v2
+name: garmin-scaler
+description: A Helm chart for the Micronaut Garmin Scaler application
+version: 0.1.0
+appVersion: "1.0.0"
