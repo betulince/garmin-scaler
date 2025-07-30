@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      DATASOURCES_DEFAULT_URL: jdbc:mysql://host.docker.internal:3306/garmin-activities-db
+      DATASOURCES_DEFAULT_USERNAME: root
+      DATASOURCES_DEFAULT_PASSWORD: 'NewStrongPassword!'
+      DATASOURCES_DEFAULT_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      DATASOURCES_DEFAULT_DIALECT: MYSQL
+      JPA_DEFAULT_ENTITY_SCAN_PACKAGES: com.garmin.scaler.domain
+      JPA_DEFAULT_PROPERTIES_HIBERNATE_HBM2DDL_AUTO: update
+      JPA_DEFAULT_PROPERTIES_HIBERNATE_SHOW_SQL: "true"
+      MICRONAUT_APPLICATION_NAME: activity-analyzer
+      MICRONAUT_METRICS_ENABLED: "true"
+      MICRONAUT_METRICS_EXPORT_PROMETHEUS_ENABLED: "true"
+      ENDPOINTS_PROMETHEUS_ENABLED: "true"
+      ENDPOINTS_PROMETHEUS_SENSITIVE: "false"
+    volumes:
+      - ./:/home/gradle/src
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: NewStrongPassword!
+      MYSQL_DATABASE: garmin-activities-db
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:

@@ -1,8 +1,5 @@
-FROM gradle:8.2-jdk17 AS build
-COPY . /app
+FROM amazoncorretto:17
 WORKDIR /app
-RUN gradle build
-
-FROM eclipse-temurin:17
-COPY --from=build /app/build/libs/*.jar app.jar
+COPY build/libs/garmin-scaler-0.1-all.jar app.jar
+EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]

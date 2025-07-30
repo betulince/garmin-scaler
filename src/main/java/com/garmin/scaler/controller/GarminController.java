@@ -36,15 +36,14 @@ public class GarminController {
             DailyActivity saved = activityService.saveOrUpdateActivity(activityDto);
             meterRegistry.counter("activities.uploaded").increment();
             return HttpResponse.ok(Map.of(
-                    "Status", "Success",
-                    "ActivityId", saved.getActivityId()
+                    "status", "success",
+                    "activityId", saved.getActivityId()
             ));
         } catch (Exception e) {
             return HttpResponse.serverError(Map.of(
-                    "Error", e.getMessage()
+                    "error", e.getMessage()
             ));
         }
-
 
     }
 
@@ -58,8 +57,8 @@ public class GarminController {
             return HttpResponse.ok(existingOpt.get());
         } else {
             return HttpResponse.notFound(Map.of(
-                    "Status", "Not found",
-                    "Message", "No activity found with the given name and date"
+                    "status", "Not found",
+                    "message", "No activity found with the given name and date"
             ));
         }
     }

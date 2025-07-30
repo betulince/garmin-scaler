@@ -1,2 +1,8 @@
-rootProject.name = "garmin-scaler"
+pluginManagement {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+        gradlePluginPortal()
+    }
+}
 
+rootProject.name = "garmin-scaler"
