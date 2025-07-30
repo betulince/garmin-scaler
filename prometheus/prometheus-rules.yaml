@@ -1,0 +1,5 @@
+groups:
+  - name: activity.rules
+    rules:
+      - record: activity_upload_rate
+        expr: rate(activity_upload_total[1m])

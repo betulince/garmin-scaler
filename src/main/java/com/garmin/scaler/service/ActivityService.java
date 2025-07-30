@@ -28,15 +28,16 @@ public class ActivityService {
             existing.setActivityName(entity.getActivityName());
             existing.setActivityTypeId(entity.getActivityTypeId());
             existing.setActivityTypeKey(entity.getActivityTypeKey());
-            existing.setStartTimeLocal(entity.getStartTimeLocal());
+            existing.setStartTimeGMT(entity.getStartTimeGMT());
+            existing.setEndTimeGMT(entity.getEndTimeGMT());
             existing.setDistance(entity.getDistance());
             existing.setDuration(entity.getDuration());
             existing.setCalories(entity.getCalories());
             existing.setSteps(entity.getSteps());
             existing.setAverageHR(entity.getAverageHR());
             existing.setMaxHR(entity.getMaxHR());
-            existing.setAvgCadence(entity.getAvgCadence());
-            existing.setMaxCadence(entity.getMaxCadence());
+            existing.setTrainingEffectLabel(entity.getTrainingEffectLabel());
+            existing.setVO2MaxValue(entity.getVO2MaxValue());
             existing.setLocationName(entity.getLocationName());
 
             return activityRepository.update(existing);
@@ -59,8 +60,9 @@ public class ActivityService {
             entity.setActivityTypeKey(null);
         }
 
-        if (dto.getStartTimeLocal() != null) {
-            entity.setStartTimeLocal(String.valueOf(LocalDateTime.parse(dto.getStartTimeLocal(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
+        if (dto.getStartTimeGMT() != null && dto.getEndTimeGMT() != null) {
+            entity.setStartTimeGMT(LocalDateTime.parse(dto.getStartTimeGMT(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            entity.setEndTimeGMT(LocalDateTime.parse(dto.getEndTimeGMT(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         }
 
         entity.setDistance(dto.getDistance());
@@ -69,8 +71,8 @@ public class ActivityService {
         entity.setSteps(dto.getSteps());
         entity.setAverageHR(dto.getAverageHR());
         entity.setMaxHR(dto.getMaxHR());
-        entity.setAvgCadence(dto.getAvgCadence());
-        entity.setMaxCadence(dto.getMaxCadence());
+        entity.setTrainingEffectLabel(dto.getTrainingEffectLabel());
+        entity.setVO2MaxValue(dto.getVO2MaxValue());
         entity.setLocationName(dto.getLocationName());
 
         return entity;

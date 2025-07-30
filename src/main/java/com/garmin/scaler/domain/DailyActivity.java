@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -27,14 +29,15 @@ public class DailyActivity {
     @Column(name = "activity_type_key")
     private String activityTypeKey;
 
-    private String startTimeLocal;
+    private LocalDateTime startTimeGMT;
+    private LocalDateTime endTimeGMT;
     private double distance;
     private double duration;
     private double calories;
     private int steps;
     private double averageHR;
     private double maxHR;
-    private double avgCadence;
-    private double maxCadence;
+    private String trainingEffectLabel;
+    private double vO2MaxValue;
     private String locationName;
 }

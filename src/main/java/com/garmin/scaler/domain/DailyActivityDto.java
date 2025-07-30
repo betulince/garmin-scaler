@@ -16,15 +16,16 @@ public class DailyActivityDto {
     private Long activityId;
     private String activityName;
     private ActivityTypeDto activityType;
-    private String startTimeLocal;
+    private String startTimeGMT;
+    private String endTimeGMT;
     private double distance;
     private double duration;
     private double calories;
     private int steps;
     private double averageHR;
     private double maxHR;
-    private double avgCadence;
-    private double maxCadence;
+    private String trainingEffectLabel;
+    private double vO2MaxValue;
     private String locationName;
 
     @NoArgsConstructor

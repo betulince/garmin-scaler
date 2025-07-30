@@ -1,0 +1,12 @@
+micronaut:
+  application:
+    name: activity-analyzer
+  metrics:
+    enabled: true
+    export:
+      prometheus:
+        enabled: true
+endpoints:
+  prometheus:
+    enabled: true
+    sensitive: false

@@ -5,6 +5,7 @@ import io.micronaut.data.jdbc.annotation.JdbcRepository;
 import io.micronaut.data.model.query.builder.sql.Dialect;
 import io.micronaut.data.repository.PageableRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,4 +18,7 @@ public interface ActivityRepository extends PageableRepository<DailyActivity, Lo
 
     List<DailyActivity> findByLocationName(String locationName);
 
+    Optional<DailyActivity> findByActivityNameAndStartTimeGMT(String activityName, LocalDateTime date);
+
+    List<DailyActivity> findByStartTimeGMTBetween(LocalDateTime start, LocalDateTime end);
 }
