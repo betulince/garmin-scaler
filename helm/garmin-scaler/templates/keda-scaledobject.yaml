@@ -1,0 +1,18 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ include "garmin-scaler.fullname" . }}-scaledobject
+spec:
+  scaleTargetRef:
+    name: {{ include "garmin-scaler.fullname" . }}
+  minReplicaCount: {{ .Values.keda.minReplicaCount }}
+  maxReplicaCount: {{ .Values.keda.maxReplicaCount }}
+  cooldownPeriod: {{ .Values.keda.cooldownPeriod }}
+  pollingInterval: {{ .Values.keda.pollingInterval }}
+  triggers:
+    - type: prometheus
+      metadata:
+        serverAddress: http://prometheus-server.default.svc.cluster.local
+        metricName: {{ .Values.keda.metricName }}
+        threshold: '{{ .Values.keda.threshold }}'
+        query: sum(rate({{ .Values.keda.metricName }}[1m]))

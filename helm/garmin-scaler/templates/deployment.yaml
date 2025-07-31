@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "garmin-scaler.fullname" . }}
+  labels:
+    app: {{ include "garmin-scaler.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "garmin-scaler.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "garmin-scaler.name" . }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "{{ .Values.prometheus.scrapePath }}"
+        prometheus.io/port: "{{ .Values.prometheus.scrapePort }}"
+    spec:
+      containers:
+        - name: garmin-scaler
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: MICRONAUT_APPLICATION_NAME
+              value: "activity-analyzer"

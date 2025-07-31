@@ -1,0 +1,33 @@
+nodeExporter:
+  enabled: false
+
+pushgateway:
+  enabled: false
+
+alertmanager:
+  enabled: false
+
+replicaCount: 1
+
+image:
+  repository: betulince220/garmin-scaler-runtime
+  pullPolicy: IfNotPresent
+  tag: latest
+
+service:
+  type: ClusterIP
+  port: 8080
+
+resources: {}
+
+prometheus:
+  scrapePath: /metrics
+  scrapePort: 8080
+
+keda:
+  minReplicaCount: 1
+  maxReplicaCount: 5
+  metricName: activities_uploaded_total
+  threshold: 10
+  pollingInterval: 15
+  cooldownPeriod: 30
