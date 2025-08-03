@@ -14,5 +14,5 @@ spec:
       metadata:
         serverAddress: http://prometheus-server.default.svc.cluster.local
         metricName: {{ .Values.keda.metricName }}
-        threshold: '{{ .Values.keda.threshold }}'
-        query: sum(rate({{ .Values.keda.metricName }}[1m]))
+        threshold: "0.0166"
+        query:  sum(rate(activities_uploaded_total[1m]))
