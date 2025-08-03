@@ -21,15 +21,4 @@ public class ActivityMetrics {
         uploadedActivitiesGauge.incrementAndGet();
     }
 
-    public void decrementGauge() {
-        uploadedActivitiesGauge.decrementAndGet();
-    }
-
-    public void resetGauge() {
-        uploadedActivitiesGauge.set(0);
-    }
-
-    public int getGaugeValue() {
-        return uploadedActivitiesGauge.get();
-    }
 }

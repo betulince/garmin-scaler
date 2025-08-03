@@ -5,7 +5,6 @@ import com.garmin.scaler.domain.DailyActivityDto;
 import com.garmin.scaler.metrics.ActivityMetrics;
 import com.garmin.scaler.persistency.ActivityRepository;
 import com.garmin.scaler.service.ActivityService;
-import io.micrometer.core.instrument.MeterRegistry;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
