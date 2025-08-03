@@ -12,7 +12,7 @@ spec:
   triggers:
     - type: prometheus
       metadata:
-        serverAddress: http://prometheus-server.default.svc.cluster.local
+        serverAddress: http://garmin-scaler-prometheus-server.default.svc.cluster.local
         metricName: {{ .Values.keda.metricName }}
-        threshold: "0.0166"
-        query:  sum(rate(activities_uploaded_total[1m]))
+        threshold: '{{ .Values.keda.threshold }}'
+        query: {{ .Values.keda.metricName }}

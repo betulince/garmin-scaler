@@ -24,13 +24,13 @@ prometheus:
   prometheus-pushgateway:
     enabled: false
 
-  scrapePath: /metrics
+  scrapePath: /prometheus
   scrapePort: 8080
 
 keda:
   minReplicaCount: 1
   maxReplicaCount: 5
-  metricName: activities_uploaded_total
-  threshold: 10
+  metricName: activities_uploaded_gauge
+  threshold: 3
   pollingInterval: 15
   cooldownPeriod: 30

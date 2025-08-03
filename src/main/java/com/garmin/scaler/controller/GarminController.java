@@ -2,6 +2,7 @@ package com.garmin.scaler.controller;
 
 import com.garmin.scaler.domain.DailyActivity;
 import com.garmin.scaler.domain.DailyActivityDto;
+import com.garmin.scaler.metrics.ActivityMetrics;
 import com.garmin.scaler.persistency.ActivityRepository;
 import com.garmin.scaler.service.ActivityService;
 import io.micrometer.core.instrument.MeterRegistry;
@@ -22,7 +23,7 @@ import java.util.Optional;
 public class GarminController {
 
     @Inject
-    MeterRegistry meterRegistry;
+    ActivityMetrics activityMetrics;
 
     @Inject
     ActivityService activityService;
@@ -34,7 +35,7 @@ public class GarminController {
     public HttpResponse<Map<String, Object>> uploadActivityJson(@Body DailyActivityDto activityDto) {
         try {
             DailyActivity saved = activityService.saveOrUpdateActivity(activityDto);
-            meterRegistry.counter("activities.uploaded").increment();
+            activityMetrics.incrementGauge();
             return HttpResponse.ok(Map.of(
                     "status", "success",
                     "activityId", saved.getActivityId()
